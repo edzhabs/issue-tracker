@@ -2,6 +2,7 @@ import prisma from "@/prisma/client";
 import { Avatar, Card, Flex, Heading, Table } from "@radix-ui/themes";
 import React from "react";
 import { IssueStatusBadge } from "./components";
+import Link from "next/link";
 
 const LatestIssue = async () => {
   const issues = await prisma.issue.findMany({
@@ -23,7 +24,7 @@ const LatestIssue = async () => {
               <Table.Cell>
                 <Flex justify="between">
                   <Flex direction="column" align="start">
-                    {issue.title}
+                    <Link href={"/issues/" + issue.id}>{issue.title}</Link>
                     <IssueStatusBadge status={issue.status} />
                   </Flex>
                   {issue.assignedToUser && (
